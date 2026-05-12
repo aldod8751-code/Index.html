@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Mundo Hoy · Tendencias Mundiales 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a18;
+    --paper: #f9f6ef;
+    --paper2: #f2ede2;
+    --accent: #c0392b;
+    --accent2: #2c6e49;
+    --accent3: #1a3a6b;
+    --muted: #6b6760;
+    --border: #d4cfc4;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Source Sans 3', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.6; }
+
+  /* MASTHEAD */
+  .masthead { border-bottom: 4px double var(--ink); padding: 1.5rem 2rem 1rem; text-align: center; background: var(--paper); }
+  .masthead-meta { display: flex; justify-content: space-between; font-size: 11px; font-family: var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: .8rem; border-bottom: 1px solid var(--border); padding-bottom: .5rem; }
+  .masthead-name { font-family: var(--serif); font-size: clamp(40px, 9vw, 90px); font-weight: 900; letter-spacing: -.02em; line-height: 1; color: var(--ink); }
+  .masthead-tagline { font-size: 12px; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); margin-top: .4rem; padding-top: .5rem; border-top: 1px solid var(--border); }
+
+  /* NAV */
+  nav { background: var(--ink); display: flex; overflow-x: auto; gap: 0; position: sticky; top: 0; z-index: 100; }
+  nav button { background: transparent; border: none; color: #bbb; font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: .7rem 1.2rem; cursor: pointer; white-space: nowrap; border-bottom: 3px solid transparent; transition: all .2s; }
+  nav button:hover { color: #fff; }
+  nav button.active { color: #fff; border-bottom: 3px solid var(--accent); }
+
+  /* LAYOUT */
+  .page { max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem 4rem; display: none; }
+  .page.active { display: block; }
+
+  /* TYPOGRAPHY */
+  h1 { font-family: var(--serif); font-weight: 700; line-height: 1.15; }
+  h2 { font-family: var(--serif); font-weight: 700; line-height: 1.2; }
+  h3 { font-family: var(--serif); font-weight: 400; font-style: italic; line-height: 1.25; }
+  p { color: var(--ink); font-size: 15px; line-height: 1.7; }
+  .muted { color: var(--muted); }
+
+  /* GRID SYSTEMS */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .grid-hero { display: grid; grid-template-columns: 1.7fr 1fr; gap: 2rem; }
+
+  /* DIVIDERS */
+  .rule { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+  .rule-thick { border: none; border-top: 3px solid var(--ink); margin: 1.5rem 0; }
+  .rule-double { border: none; border-top: 3px double var(--ink); margin: 1.5rem 0; }
+  .col-rule { border-left: 1px solid var(--border); padding-left: 1.5rem; }
+
+  /* SECTION LABEL */
+  .section-label { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--paper); padding: 3px 10px; margin-bottom: .8rem; }
+  .lbl-tech { background: var(--accent3); }
+  .lbl-eco { background: var(--accent2); }
+  .lbl-health { background: #7b4f00; }
+  .lbl-econ { background: #4a1060; }
+  .lbl-soc { background: var(--accent); }
+
+  /* ARTICLE STYLES */
+  .hero-article { border-top: 4px solid var(--ink); padding-top: 1rem; }
+  .hero-article h1 { font-size: clamp(22px, 4vw, 36px); margin-bottom: .6rem; }
+  .hero-article p { font-size: 15px; color: var(--muted); }
+  .article { border-top: 1px solid var(--border); padding-top: .8rem; }
+  .article h2 { font-size: 17px; margin-bottom: .4rem; }
+  .article p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .article-sm { border-top: 1px solid var(--border); padding-top: .7rem; margin-bottom: .7rem; }
+  .article-sm h3 { font-size: 15px; margin-bottom: .3rem; }
+  .article-sm p { font-size: 12px; color: var(--muted); }
+
+  /* PULL QUOTE */
+  .pullquote { border-left: 4px solid var(--accent); padding: .5rem 1rem; margin: 1.2rem 0; font-family: var(--serif); font-size: 17px; font-style: italic; line-height: 1.5; color: var(--ink); }
+
+  /* STAT BOXES */
+  .stats { display: flex; gap: 1rem; margin: 1rem 0; }
+  .stat { flex: 1; background: var(--paper2); border: 1px solid var(--border); padding: .8rem; text-align: center; }
+  .stat-n { font-family: var(--serif); font-size: 26px; font-weight: 700; color: var(--accent3); line-height: 1; }
+  .stat-n.eco { color: var(--accent2); }
+  .stat-n.health { color: #7b4f00; }
+  .stat-n.econ { color: #4a1060; }
+  .stat-n.soc { color: var(--accent); }
+  .stat-l { font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.3; }
+
+  /* BARS */
+  .bar-wrap { margin: .6rem 0; }
+  .bar-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 3px; }
+  .bar-track { background: var(--paper2); border: 1px solid var(--border); height: 10px; }
+  .bar-fill { height: 10px; transition: width 1.2s ease; }
+
+  /* TIMELINE */
+  .timeline { border-left: 2px solid var(--border); padding-left: 1.2rem; }
+  .tl { position: relative; margin-bottom: .9rem; }
+  .tl::before { content: ''; position: absolute; left: -1.55rem; top: 5px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); border: 2px solid var(--paper); }
+  .tl-y { font-size: 11px; font-weight: 600; color: var(--accent); letter-spacing: .05em; }
+  .tl-t { font-size: 13px; color: var(--ink); line-height: 1.4; margin-top: 1px; }
+
+  /* POLL */
+  .poll { background: var(--paper2); border: 1px solid var(--border); padding: 1.2rem; margin: 1rem 0; }
+  .poll-q { font-family: var(--serif); font-size: 15px; font-weight: 700; margin-bottom: .8rem; }
+  .poll-opt { display: flex; align-items: center; gap: 10px; margin-bottom: .5rem; cursor: pointer; padding: .4rem; transition: background .15s; }
+  .poll-opt:hover { background: var(--paper); }
+  .poll-dot { width: 16px; height: 16px; border: 1.5px solid var(--border); border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .poll-dot.on { border-color: var(--accent); background: var(--accent); }
+  .poll-dot.on::after { content: ''; width: 6px; height: 6px; background: #fff; border-radius: 50%; }
+  .poll-text { font-size: 13px; flex: 1; }
+  .poll-pct { font-size: 12px; font-weight: 600; color: var(--accent); display: none; }
+  .vote-btn { margin-top: .8rem; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: .5rem 1.2rem; border: 1.5px solid var(--ink); background: transparent; cursor: pointer; font-family: var(--sans); transition: all .2s; }
+  .vote-btn:hover { background: var(--ink); color: var(--paper); }
+  .vote-btn:disabled { opacity: .5; cursor: default; }
+
+  /* QUIZ */
+  .quiz { background: var(--paper2); border: 1px solid var(--border); padding: 1.2rem; margin: .8rem 0; }
+  .quiz-q { font-family: var(--serif); font-size: 15px; font-weight: 700; margin-bottom: .8rem; }
+  .quiz-opts { display: flex; flex-direction: column; gap: .4rem; }
+  .quiz-opt { text-align: left; padding: .5rem .8rem; border: 1px solid var(--border); background: var(--paper); cursor: pointer; font-size: 13px; font-family: var(--sans); color: var(--ink); transition: background .15s; }
+  .quiz-opt:hover:not(:disabled) { background: var(--paper2); }
+  .quiz-opt.correct { background: #d4edda; border-color: var(--accent2); color: #155724; }
+  .quiz-opt.wrong { background: #f8d7da; border-color: var(--accent); color: #721c24; }
+  .quiz-fb { font-size: 13px; font-weight: 600; margin-top: .5rem; }
+  .score-box { background: var(--ink); color: var(--paper); padding: 1.5rem; text-align: center; margin-top: 1.5rem; display: none; }
+  .score-n { font-family: var(--serif); font-size: 48px; font-weight: 900; }
+  .score-m { font-size: 14px; opacity: .8; margin-top: .3rem; }
+
+  /* FOOTER */
+  footer { background: var(--ink); color: #aaa; text-align: center; font-size: 11px; letter-spacing: .06em; padding: 1.5rem; margin-top: 0; }
+  footer strong { color: var(--paper); }
+
+  /* TAGS */
+  .tag { display: inline-block; font-size: 10px; letter-spacing: .06em; text-transform: uppercase; border: 1px solid var(--border); padding: 2px 7px; margin: 2px; color: var(--muted); }
+
+  @media (max-width: 640px) {
+    .grid-2, .grid-3, .grid-hero, .stats { grid-template-columns: 1fr; flex-direction: column; }
+    .col-rule { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 1rem; }
+    .masthead-name { font-size: 48px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-meta">
+    <span>Edición Digital · Mayo 2026</span>
+    <span>Tendencias Mundiales</span>
+    <span>Vol. 1 · Núm. 1</span>
+  </div>
+  <div class="masthead-name">EL MUNDO HOY</div>
+  <div class="masthead-tagline">Tecnología · Medio Ambiente · Salud · Economía · Sociedad</div>
+</div>
+
+<nav>
+  <button class="active" onclick="show('portada',this)">Portada</button>
+  <button onclick="show('tecnologia',this)">Tecnología</button>
+  <button onclick="show('medioambiente',this)">Medio Ambiente</button>
+  <button onclick="show('salud',this)">Salud</button>
+  <button onclick="show('economia',this)">Economía</button>
+  <button onclick="show('sociedad',this)">Sociedad</button>
+  <button onclick="show('interactivo',this)">Interactivo</button>
+</nav>
+
+<!-- ══════════ PORTADA ══════════ -->
+<div class="page active" id="portada">
+  <div class="grid-hero" style="margin-top:1.5rem">
+    <div class="hero-article">
+      <span class="section-label lbl-tech">Tecnología</span>
+      <h1>La IA agentiva redefine el trabajo: ya no responde, decide por sí sola</h1>
+      <hr class="rule">
+      <p>Los sistemas de inteligencia artificial de nueva generación no solo responden preguntas: establecen objetivos, coordinan recursos y ejecutan estrategias complejas de forma autónoma. Según McKinsey, la mayoría de las organizaciones aún están en fase piloto, pero 2026 marcará el punto de inflexión en la adopción masiva de la IA. Expertos del MIT y del ESADE coinciden: la pregunta ya no es si la IA superará a los humanos en ciertas tareas, sino cómo se reorganizará la economía global alrededor de esta nueva realidad.</p>
+      <div class="pullquote">"La adopción se generaliza y empieza a parecer exponencial. 2026 es el año de la transformación." — Prof. Esteve Almirall, ESADE</div>
+      <div class="stats">
+        <div class="stat"><div class="stat-n">⅔</div><div class="stat-l">empresas aún no escalan la IA, según McKinsey</div></div>
+        <div class="stat"><div class="stat-n">9,000+</div><div class="stat-l">líderes encuestados por Deloitte en 89 países</div></div>
+        <div class="stat"><div class="stat-n">2026</div><div class="stat-l">año de inflexión tecnológica global, según ESADE</div></div>
+      </div>
+    </div>
+    <div class="col-rule">
+      <div class="article-sm">
+        <span class="section-label lbl-eco">Medio Ambiente</span>
+        <h3>Las renovables superan al carbón por primera vez en la historia energética global</h3>
+        <p>La AIE confirma que 2025 es el año en que las energías renovables se convierten en la principal fuente de electricidad mundial. Solar y eólica encabezan la expansión más rápida en tres décadas.</p>
+      </div>
+      <hr class="rule">
+      <div class="article-sm">
+        <span class="section-label lbl-health">Salud</span>
+        <h3>Revolución GLP-1: los medicamentos anti-obesidad abren un debate ético global sobre el cuerpo humano</h3>
+        <p>Fármacos como Ozempic llegan en 2026 más baratos y en formato oral. El debate ya trasciende la medicina y llega a la autoestima, el rendimiento y los límites del mejoramiento humano.</p>
+      </div>
+      <hr class="rule">
+      <div class="article-sm">
+        <span class="section-label lbl-econ">Economía</span>
+        <h3>PIB mundial crece 3.1%, pero el comercio global solo avanza 0.5% por tensiones arancelarias</h3>
+        <p>El FMI proyecta crecimiento moderado mientras la OMC advierte que el proteccionismo erosiona las reglas del comercio. Solo el 74% del intercambio global sigue las normas internacionales.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="rule-thick">
+
+  <div class="grid-3">
+    <div class="article">
+      <span class="section-label lbl-tech">Tecnología</span>
+      <h2>Computación cuántica: de $4,000M en 2024 a $72,000M para 2035</h2>
+      <p>BCG y McKinsey coinciden: la computación cuántica generará entre 450 y 850 mil millones de dólares en valor económico para 2040. Las empresas que la ignoren hoy quedarán fuera de sectores críticos.</p>
+      <div style="margin-top:.6rem"><span class="tag">Quantum</span><span class="tag">BCG</span><span class="tag">2040</span></div>
+    </div>
+    <div class="article">
+      <span class="section-label lbl-soc">Sociedad</span>
+      <h2>Mundial 2026: el fútbol como arena política en un mundo fragmentado</h2>
+      <p>La Copa del Mundo en EE.UU., México y Canadá transcurre en medio de tensiones diplomáticas sin precedentes entre los tres países anfitriones. The Economist lo señala como el evento social más significativo del año.</p>
+      <div style="margin-top:.6rem"><span class="tag">FIFA 2026</span><span class="tag">Geopolítica</span></div>
+    </div>
+    <div class="article">
+      <span class="section-label lbl-eco">Medio Ambiente</span>
+      <h2>Baterías de sodio: la alternativa al litio que cambiará el almacenamiento de energía</h2>
+      <p>El MIT identifica esta tecnología entre las 10 más disruptivas de 2026. Más baratas y seguras que las de litio, podrían resolver el cuello de botella de las renovables: la intermitencia solar y eólica.</p>
+      <div style="margin-top:.6rem"><span class="tag">MIT 2026</span><span class="tag">Energía</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ TECNOLOGÍA ══════════ -->
+<div class="page" id="tecnologia">
+  <hr class="rule-double" style="margin-top:1.5rem">
+  <span class="section-label lbl-tech">Tecnología</span>
+  <div class="grid-hero">
+    <div>
+      <h1 style="font-size:clamp(22px,4vw,34px)">12 tendencias tecnológicas que marcarán 2026, según ESADE y el MIT</h1>
+      <hr class="rule">
+      <p>Así como Internet o la Revolución Industrial no llegaron de golpe, la transformación de la IA se construye sobre infraestructuras. El profesor Esteve Almirall del ESADE afirma que 2026 es el año en que la adopción "empieza a parecer exponencial". Los centros de datos —y pronto los orbitales— son el nuevo cimiento digital de la economía global.</p>
+      <div class="pullquote">"La pregunta ya no es si la IA funcionará mejor que los humanos, sino cómo se reorganizará la economía a su alrededor." — ESADE, 2026</div>
+      <p>La colaboración entre Nvidia y StarCloud ha dado lugar al primer modelo de IA entrenado en órbita. Los satélites conectados directamente a smartphones (Starlink) y las redes 10G en prueba en China anticipan un cambio radical en las telecomunicaciones globales en los próximos 24 meses.</p>
+    </div>
+    <div class="col-rule">
+      <h3 style="font-size:14px;margin-bottom:1rem;font-style:normal;font-weight:600;letter-spacing:.05em;text-transform:uppercase;font-size:11px;color:var(--muted)">Índice de disrupción 2026 · MIT / ESADE / McKinsey</h3>
+      <div class="bar-wrap"><div class="bar-label"><span>IA agentiva</span><span>95%</span></div><div class="bar-track"><div class="bar-fill" style="width:95%;background:#1a3a6b"></div></div></div>
+      <div class="bar-wrap"><div class="bar-label"><span>Computación cuántica</span><span>78%</span></div><div class="bar-track"><div class="bar-fill" style="width:78%;background:#4a1060"></div></div></div>
+      <div class="bar-wrap"><div class="bar-label"><span>Robots humanoides</span><span>70%</span></div><div class="bar-track"><div class="bar-fill" style="width:70%;background:#2c6e49"></div></div></div>
+      <div class="bar-wrap"><div class="bar-label"><span>Edición genética personalizada</span><span>65%</span></div><div class="bar-track"><div class="bar-fill" style="width:65%;background:#7b4f00"></div></div></div>
+      <div class="bar-wrap"><div class="bar-label"><span>Conectividad satelital directa</span><span>60%</span></div><div class="bar-track"><div class="bar-fill" style="width:60%;background:#c0392b"></div></div></div>
+      <div class="bar-wrap"><div class="bar-label"><span>Turismo espacial privado</span><span>40%</span></div><div class="bar-track"><div class="bar-fill" style="width:40%;background:#888"></div></div></div>
+    </div>
+  </div>
+  <hr class="rule-thick">
+  <div class="grid-3">
+    <div class="article">
+      <h2>IA agentiva: sistemas que deciden solos</h2>
+      <p>A diferencia de los sistemas tradicionales, los agentes de IA comprenden el contexto y adaptan sus estrategias conforme evoluciona la situación. Identifican oportunidades, definen objetivos y coordinan recursos para alcanzarlos sin supervisión humana continua.</p>
+    </div>
+    <div class="article">
+      <h2>El espacio: la nueva frontera computacional</h2>
+      <p>Los centros de datos orbitales aprovechan condiciones térmicas y energéticas únicas. La colaboración Nvidia-StarCloud ya demostró que es posible entrenar modelos de IA en órbita. Si el lanzamiento de cohetes sigue abaratándose, 2026 verá nuevos proyectos en este frente.</p>
+    </div>
+    <div class="article">
+      <h2>60% de empresas adoptarán IA sostenible en 2026</h2>
+      <p>El IDC FutureScape proyecta que seis de cada diez empresas implementarán marcos de IA sostenible en 2026, usando datos para escalar operaciones mientras cumplen objetivos de descarbonización. Edge computing y eficiencia energética son las palancas clave.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MEDIO AMBIENTE ══════════ -->
+<div class="page" id="medioambiente">
+  <hr class="rule-double" style="margin-top:1.5rem">
+  <span class="section-label lbl-eco">Medio Ambiente</span>
+  <h1 style="font-size:clamp(22px,4vw,34px);margin-bottom:.8rem">Las energías renovables superan al carbón: un hito histórico en la transición energética global</h1>
+  <div class="grid-hero">
+    <div>
+      <p>La Agencia Internacional de la Energía (AIE) confirma que las energías renovables superaron al carbón como principal fuente de electricidad mundial en 2025. La expansión es la más rápida en tres décadas. Se proyecta que la eólica y solar superen a la energía nuclear en 2025 y 2026 respectivamente, y que para 2028, 68 países cuenten con renovables como su fuente de energía principal.</p>
+      <div class="pullquote">"Entre 2028 y 2030, la energía eólica y solar serán las principales fuentes renovables a nivel global." — CESUMA, 2025</div>
+      <p>Alcanzar cero emisiones netas requerirá construir o modernizar 25 millones de kilómetros de redes eléctricas en cinco años, según la AIE. Las inundaciones causan ya $40,000 millones en daños anuales, impulsando la necesidad de infraestructuras resilientes al clima.</p>
+    </div>
+    <div class="col-rule">
+      <div class="stats" style="flex-direction:column">
+        <div class="stat"><div class="stat-n eco">68</div><div class="stat-l">países liderados por renovables para 2028</div></div>
+        <div class="stat"><div class="stat-n eco">25M km</div><div class="stat-l">de red eléctrica a construir o modernizar</div></div>
+        <div class="stat"><div class="stat-n eco">$40B</div><div class="stat-l">en daños anuales por inundaciones</div></div>
+      </div>
+    </div>
+  </div>
+  <hr class="rule-thick">
+  <div class="grid-3">
+    <div class="article">
+      <h2>Baterías de sodio: el futuro del almacenamiento energético</h2>
+      <p>La escasez de litio impulsa la búsqueda de alternativas. Las baterías de iones de sodio son más baratas, seguras y abundantes. El MIT las incluye entre las 10 tecnologías más disruptivas de 2026, pues podrían resolver la intermitencia solar y eólica.</p>
+    </div>
+    <div class="article">
+      <h2>Economía circular: del "usar y tirar" al ciclo continuo</h2>
+      <p>A diferencia del modelo lineal de producción, la economía circular promueve el reciclaje, la reparación y la reutilización. Las regulaciones ambientales se endurecen en economías avanzadas. La madera resurge como material clave: packaging, construcción y botellas con PET de base madera.</p>
+    </div>
+    <div class="article">
+      <h2>¿Hemos alcanzado el pico de emisiones globales?</h2>
+      <p>Según The Economist, las emisiones globales probablemente han alcanzado su máximo histórico. La tecnología limpia avanza con fuerza en el Sur Global. Muchas empresas cumplen sus objetivos climáticos pero prefieren no publicitarlo para evitar represalias políticas en un contexto polarizado.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SALUD ══════════ -->
+<div class="page" id="salud">
+  <hr class="rule-double" style="margin-top:1.5rem">
+  <span class="section-label lbl-health">Salud</span>
+  <h1 style="font-size:clamp(22px,4vw,34px);margin-bottom:.8rem">La revolución GLP-1: cómo los medicamentos anti-obesidad están rediseñando la cultura del cuerpo</h1>
+  <div class="grid-hero">
+    <div>
+      <p>Los fármacos basados en GLP-1, como Ozempic y Wegovy, llegan en 2026 en formatos más baratos y en versión oral, ampliando masivamente su acceso. El debate ya no es solo médico: The Economist lo lleva al terreno de la ética, la autoestima colectiva y los límites del "mejoramiento humano" con sustancias.</p>
+      <div class="pullquote">"Pocos compiten en los Juegos Olímpicos, pero cualquiera puede participar en los juegos de Ozempic." — The Economist, 2026</div>
+      <p>Empresas como Nestlé y Herbalife han lanzado líneas de productos complementarios a GLP-1, orientados a preservar la masa muscular durante su uso. En paralelo, el MIT identifica la edición genética personalizada como otra de las tendencias clínicas más relevantes: un bebé estadounidense recibió en 2025 el primer tratamiento diseñado específicamente para él, con resultados exitosos.</p>
+      <div class="stats" style="margin-top:1rem">
+        <div class="stat"><div class="stat-n health">2021</div><div class="stat-l">FDA aprueba semaglutida para obesidad</div></div>
+        <div class="stat"><div class="stat-n health">2026</div><div class="stat-l">GLP-1 oral y más barato, acceso masivo</div></div>
+      </div>
+    </div>
+    <div class="col-rule">
+      <h3 style="font-style:normal;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem">Línea del tiempo GLP-1</h3>
+      <div class="timeline">
+        <div class="tl"><div class="tl-y">2021</div><div class="tl-t">FDA aprueba Wegovy (semaglutida) para el tratamiento de obesidad en adultos.</div></div>
+        <div class="tl"><div class="tl-y">2023</div><div class="tl-t">Ozempic se vuelve viral. Escasez global del medicamento por demanda no prevista.</div></div>
+        <div class="tl"><div class="tl-y">2024</div><div class="tl-t">Nestlé y Herbalife lanzan líneas de productos complementarios para usuarios de GLP-1.</div></div>
+        <div class="tl"><div class="tl-y">2025</div><div class="tl-t">Primer bebé recibe tratamiento de edición genética personalizada. Resultados exitosos reportados por el MIT.</div></div>
+        <div class="tl"><div class="tl-y">2026</div><div class="tl-t">GLP-1 en versión oral y a menor costo. Debate ético global sobre mejoramiento humano y autoestima.</div></div>
+      </div>
+    </div>
+  </div>
+  <hr class="rule-thick">
+  <div class="grid-2">
+    <div class="article">
+      <h2>Edición genética: el horizonte de las enfermedades raras</h2>
+      <p>El bebé que en 2025 recibió el primer tratamiento de edición genética personalizada hoy vive con normalidad. El MIT proyecta que 2026 será el año de los primeros ensayos clínicos ampliados. Esta tendencia podría inaugurar la era de los "fármacos únicos por paciente" para enfermedades que hoy no tienen cura.</p>
+    </div>
+    <div class="article">
+      <h2>La economía del bienestar: salud mental como prioridad estratégica</h2>
+      <p>El IEBS destaca que la economía del bienestar se consolida como objetivo central para gobiernos y empresas. Las iniciativas de salud mental, desconexión digital y acceso igualitario a oportunidades económicas definen una nueva prioridad: el equilibrio entre productividad y calidad de vida.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ ECONOMÍA ══════════ -->
+<div class="page" id="economia">
+  <hr class="rule-double" style="margin-top:1.5rem">
+  <span class="section-label lbl-econ">Economía</span>
+  <h1 style="font-size:clamp(22px,4vw,34px);margin-bottom:.8rem">2026: crecimiento moderado, proteccionismo récord y un comercio global que frena</h1>
+  <div class="grid-hero">
+    <div>
+      <p>El FMI proyecta un crecimiento del PIB mundial de 3.1% para 2026, pero la OMC advierte que el comercio global solo crecerá 0.5% —el más bajo en años— por el proteccionismo y las tensiones arancelarias. Solo el 74% del comercio mundial sigue respetando las reglas de la OMC.</p>
+      <div class="pullquote">"El miedo a la incertidumbre impactará las agendas económicas y sociales. 2026 pondrá a prueba la resistencia de las sociedades." — CIDOB, 2026</div>
+      <p>La rivalidad EE.UU.–China redefine las cadenas de suministro globales. La canasta de la compra en Europa cuesta un 34% más que en 2019, según el BCE. La crisis de vivienda persiste en las grandes ciudades, donde los precios se han desacoplado de los salarios de la clase media.</p>
+    </div>
+    <div class="col-rule">
+      <div class="stats" style="flex-direction:column">
+        <div class="stat"><div class="stat-n econ">3.1%</div><div class="stat-l">crecimiento PIB mundial · FMI 2026</div></div>
+        <div class="stat"><div class="stat-n econ">0.5%</div><div class="stat-l">crecimiento comercio global · OMC</div></div>
+        <div class="stat"><div class="stat-n econ">74%</div><div class="stat-l">del comercio sigue reglas de la OMC</div></div>
+        <div class="stat"><div class="stat-n econ">+34%</div><div class="stat-l">costo de la canasta en Europa vs 2019 · BCE</div></div>
+      </div>
+    </div>
+  </div>
+  <hr class="rule-thick">
+  <div class="grid-3">
+    <div class="article">
+      <h2>Fintech y DeFi: la banca se reinventa desde las bases</h2>
+      <p>La banca abierta y las finanzas descentralizadas eliminan intermediarios y personalizan servicios financieros. Startups como Revolut lideran la transformación, y los contratos inteligentes consolidan las criptomonedas como herramienta funcional más allá de la especulación.</p>
+    </div>
+    <div class="article">
+      <h2>Materias primas en mínimos de seis años</h2>
+      <p>El Banco Mundial estima que los precios de energía y alimentos podrían caer a mínimos de seis años en 2025–2026. Este escenario abarata el vehículo eléctrico y la infraestructura verde, pero presiona la rentabilidad de países mineros y empresas extractivas.</p>
+    </div>
+    <div class="article">
+      <h2>Capital humano como ventaja competitiva ante la IA</h2>
+      <p>Deloitte encuestó 9,000 líderes en 89 países: 7 de cada 10 dice que su estrategia para los próximos tres años es ser rápido y ágil. Las organizaciones que diseñen la colaboración humano-IA de forma intencional superarán las expectativas de retorno.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SOCIEDAD ══════════ -->
+<div class="page" id="sociedad">
+  <hr class="rule-double" style="margin-top:1.5rem">
+  <span class="section-label lbl-soc">Sociedad</span>
+  <h1 style="font-size:clamp(22px,4vw,34px);margin-bottom:.8rem">Un mundo más fragmentado: demografía, vivienda, trabajo y cultura en tensión permanente</h1>
+  <div class="grid-hero">
+    <div>
+      <p>La sociedad global de 2026 afronta múltiples tensiones simultáneas: mercados de vivienda desconectados de los salarios, mercado laboral dual (pleno empleo para perfiles cualificados, precariedad para jóvenes sin especialización), y una nueva cultura de consumo que prefiere experiencias sobre bienes físicos.</p>
+      <div class="pullquote">"La hiperautomatización promete acelerar la eficiencia, pero plantea desafíos éticos fundamentales sobre el rol humano en el trabajo." — IEBS, 2025</div>
+      <p>La cultura latina en música y entretenimiento crece globalmente. Los grandes eventos de 2026 —Copa del Mundo, Juegos Olímpicos de Invierno en Milán-Cortina— refuerzan este dinamismo. Crece también el interés por productos sin alcohol, impulsado por tendencias de salud consciente.</p>
+    </div>
+    <div class="col-rule">
+      <h3 style="font-style:normal;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem">Tensiones sociales clave · 2026</h3>
+      <div class="bar-wrap"><div class="bar-label"><span>Polarización política</span><span>Muy alta</span></div><div class="bar-track"><div class="bar-fill" style="width:92%;background:#c0392b"></div></div></div>
+      <div class="bar-wrap"><div class="bar-label"><span>Crisis de vivienda urbana</span><span>Alta</span></div><div class="bar-track"><div class="bar-fill" style="width:85%;background:#c0392b"></div></div></div>
+      <div class="bar-wrap"><div class="bar-label"><span>Brecha laboral jóvenes vs seniors</span><span>Alta</span></div><div class="bar-track"><div class="bar-fill" style="width:80%;background:#7b4f00"></div></div></div>
+      <div class="bar-wrap"><div class="bar-label"><span>Desigualdad digital</span><span>Media</span></div><div class="bar-track"><div class="bar-fill" style="width:62%;background:#4a1060"></div></div></div>
+      <div class="bar-wrap"><div class="bar-label"><span>Demanda experiencias vs bienes</span><span>Creciente</span></div><div class="bar-track"><div class="bar-fill" style="width:74%;background:#1a3a6b"></div></div></div>
+      <p style="font-size:11px;color:var(--muted);margin-top:.5rem">Evaluación cualitativa · CIDOB, The Economist, IEBS 2026</p>
+    </div>
+  </div>
+  <hr class="rule-thick">
+  <div class="grid-2">
+    <div class="article">
+      <h2>Geopolítica de fragmentación: EE.UU. vs China y Europa en rearme</h2>
+      <p>La rivalidad EE.UU.–China define la agenda estratégica global en tecnología, comercio y acceso a minerales críticos. Europa, con crecimiento modesto, afronta su mayor esfuerzo de rearme histórico: el gasto en defensa crece mientras los presupuestos de bienestar social se reducen. Las misiones de paz de la ONU pierden $500M de financiamiento en 2026.</p>
+    </div>
+    <div class="article">
+      <h2>La moda circular: sostenibilidad como identidad generacional</h2>
+      <p>Los materiales sostenibles —telas recicladas y biodegradables— se consolidan como pilar de la moda 2025–2026. La moda circular extiende el ciclo de vida de las prendas y reduce el desperdicio. Las siluetas fluidas y prendas multifuncionales responden a una demanda de comodidad que las generaciones jóvenes convierten en declaración de valores.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ INTERACTIVO ══════════ -->
+<div class="page" id="interactivo">
+  <hr class="rule-double" style="margin-top:1.5rem">
+  <h2 style="font-size:22px;margin-bottom:.3rem">Sección interactiva</h2>
+  <p class="muted" style="font-size:13px;margin-bottom:1.5rem">Vota en las encuestas y pon a prueba tu conocimiento sobre las tendencias mundiales 2026</p>
+
+  <div class="grid-2">
+    <div class="poll" id="poll1">
+      <div class="poll-q">¿Cuál crees que es la tendencia más transformadora de 2026?</div>
+      <div class="poll-opt" onclick="pick('poll1',0)"><div class="poll-dot" id="p1r0"></div><div class="poll-text">Inteligencia artificial agentiva</div><div class="poll-pct" id="p1p0">38%</div></div>
+      <div class="poll-opt" onclick="pick('poll1',1)"><div class="poll-dot" id="p1r1"></div><div class="poll-text">Energías renovables y transición verde</div><div class="poll-pct" id="p1p1">27%</div></div>
+      <div class="poll-opt" onclick="pick('poll1',2)"><div class="poll-dot" id="p1r2"></div><div class="poll-text">Medicamentos GLP-1 y revolución en salud</div><div class="poll-pct" id="p1p2">18%</div></div>
+      <div class="poll-opt" onclick="pick('poll1',3)"><div class="poll-dot" id="p1r3"></div><div class="poll-text">Computación cuántica</div><div class="poll-pct" id="p1p3">17%</div></div>
+      <button class="vote-btn" id="poll1-btn" onclick="vote('poll1',4)">Votar</button>
+    </div>
+
+    <div class="poll" id="poll2">
+      <div class="poll-q">¿Qué te preocupa más del panorama global en 2026?</div>
+      <div class="poll-opt" onclick="pick('poll2',0)"><div class="poll-dot" id="p2r0"></div><div class="poll-text">La incertidumbre económica y el costo de vida</div><div class="poll-pct" id="p2p0">42%</div></div>
+      <div class="poll-opt" onclick="pick('poll2',1)"><div class="poll-dot" id="p2r1"></div><div class="poll-text">El cambio climático y sus efectos</div><div class="poll-pct" id="p2p1">31%</div></div>
+      <div class="poll-opt" onclick="pick('poll2',2)"><div class="poll-dot" id="p2r2"></div><div class="poll-text">El desempleo por la automatización y la IA</div><div class="poll-pct" id="p2p2">18%</div></div>
+      <div class="poll-opt" onclick="pick('poll2',3)"><div class="poll-dot" id="p2r3"></div><div class="poll-text">Las tensiones geopolíticas entre potencias</div><div class="poll-pct" id="p2p3">9%</div></div>
+      <button class="vote-btn" id="poll2-btn" onclick="vote('poll2',4)">Votar</button>
+    </div>
+  </div>
+
+  <hr class="rule-thick">
+  <h2 style="font-size:20px;margin-bottom:1rem">Quiz: ¿Qué tanto sabes de las tendencias mundiales 2026?</h2>
+
+  <div class="quiz" id="q1">
+    <div class="quiz-q">1. Según la AIE, ¿cuántos kilómetros de red eléctrica hay que construir o modernizar en 5 años para lograr cero emisiones netas?</div>
+    <div class="quiz-opts">
+      <button class="quiz-opt" onclick="ans('q1',this,1)">10 millones de km</button>
+      <button class="quiz-opt" onclick="ans('q1',this,1)">25 millones de km</button>
+      <button class="quiz-opt" onclick="ans('q1',this,1)">50 millones de km</button>
+      <button class="quiz-opt" onclick="ans('q1',this,1)">5 millones de km</button>
+    </div>
+    <div class="quiz-fb" id="q1fb" style="display:none"></div>
+  </div>
+
+  <div class="quiz" id="q2">
+    <div class="quiz-q">2. ¿Cuánto crecerá el comercio mundial en 2026, según la Organización Mundial del Comercio?</div>
+    <div class="quiz-opts">
+      <button class="quiz-opt" onclick="ans('q2',this,2)">3.1%</button>
+      <button class="quiz-opt" onclick="ans('q2',this,2)">1.8%</button>
+      <button class="quiz-opt" onclick="ans('q2',this,2)">0.5%</button>
+      <button class="quiz-opt" onclick="ans('q2',this,2)">4.5%</button>
+    </div>
+    <div class="quiz-fb" id="q2fb" style="display:none"></div>
+  </div>
+
+  <div class="quiz" id="q3">
+    <div class="quiz-q">3. ¿Cuál es el valor económico global proyectado para la computación cuántica hacia 2040, según BCG?</div>
+    <div class="quiz-opts">
+      <button class="quiz-opt" onclick="ans('q3',this,2)">Entre $90–170 mil millones</button>
+      <button class="quiz-opt" onclick="ans('q3',this,2)">Entre $450–850 mil millones</button>
+      <button class="quiz-opt" onclick="ans('q3',this,2)">Más de $2 billones</button>
+      <button class="quiz-opt" onclick="ans('q3',this,2)">Menos de $50 mil millones</button>
+    </div>
+    <div class="quiz-fb" id="q3fb" style="display:none"></div>
+  </div>
+
+  <div class="score-box" id="scorebox">
+    <div class="score-n" id="scoren"></div>
+    <div class="score-m" id="scorem"></div>
+  </div>
+</div>
+
+<footer>
+  <strong>EL MUNDO HOY</strong> · Periódico Digital de Tendencias Mundiales · Mayo 2026<br>
+  Fuentes: MIT · ESADE · McKinsey · The Economist · AIE · FMI · OMC · Deloitte · CIDOB · BCG · IEBS
+</footer>
+
+<script>
+function show(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+var pSel={};
+function pick(id,i){
+  if(document.getElementById(id+'-btn').disabled)return;
+  pSel[id]=i;
+  for(var j=0;j<4;j++){
+    var d=document.getElementById('p'+(id==='poll1'?'1':'2')+'r'+j);
+    if(d){d.classList.toggle('on',j===i);}
+  }
+}
+function vote(id,n){
+  if(pSel[id]===undefined){alert('Selecciona una opción.');return;}
+  var pre=id==='poll1'?'p1':'p2';
+  for(var j=0;j<n;j++){
+    var p=document.getElementById(pre+'p'+j);
+    if(p)p.style.display='block';
+  }
+  var btn=document.getElementById(id+'-btn');
+  btn.textContent='¡Gracias por votar!';
+  btn.disabled=true;
+}
+
+var correctAnswers={q1:1,q2:2,q3:1};
+var done={};var score=0;var total=3;
+function ans(qid,btn,correct){
+  if(done[qid])return;
+  done[qid]=true;
+  var opts=document.querySelectorAll('#'+qid+' .quiz-opt');
+  opts.forEach(function(o){o.disabled=true;});
+  var chosen=Array.from(opts).indexOf(btn);
+  var fb=document.getElementById(qid+'fb');
+  if(chosen===correctAnswers[qid]){
+    btn.classList.add('correct');
+    fb.style.color='#155724';
+    fb.textContent='✓ ¡Correcto!';
+    score++;
+  }else{
+    btn.classList.add('wrong');
+    opts[correctAnswers[qid]].classList.add('correct');
+    fb.style.color='#721c24';
+    fb.textContent='✗ Incorrecto. La respuesta correcta está marcada en verde.';
+  }
+  fb.style.display='block';
+  if(Object.keys(done).length===total){
+    var sb=document.getElementById('scorebox');
+    sb.style.display='block';
+    document.getElementById('scoren').textContent=score+'/'+total;
+    var msgs=['Sigue explorando el periódico 📰','¡Buen conocimiento! Casi perfecto 👏','¡Experto en tendencias mundiales! 🌍'];
+    document.getElementById('scorem').textContent=msgs[score-1]||msgs[0];
+  }
+}
+</script>
+</body>
+</html>
